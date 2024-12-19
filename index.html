@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Groups with Copy Buttons</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.15.6/lib/index.js"></script>
+    <style>
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: inline-block;
+            width: 80px;
+            vertical-align: top;
+        }
+
+        .input-group input {
+            width: 200px;
+            padding: 5px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .input-group button {
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="app">
+        <!-- 第一组input框 -->
+        <div class="input-group clearfix">
+            <label for="name1">姓名:</label>
+            <input type="text" id="name1" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard1">身份证:</label>
+            <input type="text" id="idCard1" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone1">电话:</label>
+            <input type="text" id="phone1" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name1', 'idCard1', 'phone1')">复制整组</button>
+        </div>
+        <!-- 第二组input框 -->
+        <div class="input-group clearfix">
+            <label for="name2">姓名:</label>
+            <input type="text" id="name2" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard2">身份证:</label>
+            <input type="text" id="idCard2" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone2">电话:</label>
+            <input type="text" id="phone2" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name2', 'idCard2', 'phone2')">复制整组</button>
+        </div>
+        <!-- 第三组input框（可根据需要继续添加） -->
+        <div class="input-group clearfix">
+            <label for="name3">姓名:</label>
+            <input type="text" id="name3" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard3">身份证:</label>
+            <input type="text" id="idCard3" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone3">电话:</label>
+            <input type="text" id="phone3" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name3', 'idCard3', 'phone3')">复制整组</button>
+        </div>
+        <div class="input-group clearfix">
+            <label for="name4">姓名:</label>
+            <input type="text" id="name4" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard4">身份证:</label>
+            <input type="text" id="idCard4" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone4">电话:</label>
+            <input type="text" id="phone4" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name4', 'idCard4', 'phone4')">复制整组</button>
+        </div>
+
+        <div class="input-group clearfix">
+            <label for="name5">姓名:</label>
+            <input type="text" id="name5" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard5">身份证:</label>
+            <input type="text" id="idCard5" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone5">电话:</label>
+            <input type="text" id="phone5" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name5', 'idCard5', 'phone5')">复制整组</button>
+        </div>
+        
+        <div class="input-group clearfix">
+            <label for="name6">姓名:</label>
+            <input type="text" id="name6" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard6">身份证:</label>
+            <input type="text" id="idCard6" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone6">电话:</label>
+            <input type="text" id="phone6" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name6', 'idCard6', 'phone6')">复制整组</button>
+        </div>
+
+        <div class="input-group clearfix">
+            <label for="name7">姓名:</label>
+            <input type="text" id="name7" placeholder="请输入姓名">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="idCard7">身份证:</label>
+            <input type="text" id="idCard7" placeholder="请输入身份证">
+            <button onclick="copyText(this)">复制</button>
+
+            <label for="phone7">电话:</label>
+            <input type="text" id="phone7" placeholder="请输入电话">
+            <button onclick="copyText(this)">复制</button>
+
+            <button onclick="copyGroupText('name7', 'idCard7', 'phone7')">复制整组</button>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+<script>
+    const vm = new Vue({
+        el: '#app',
+    });
+    // window.ElementUI = ElementUI;
+    function copyText(button) {
+        // 获取触发事件的按钮的父元素（input-group），然后找到该元素内的所有input元素
+        var inputGroup = button.parentElement;
+        var inputs = inputGroup.getElementsByTagName('input');
+
+        // 由于按钮是input元素的兄弟元素，我们可以通过遍历找到它之前的input元素
+        // 这里我们假设每个按钮都紧跟在它对应的input元素之后
+        var targetInput = null;
+        for (var i = 0; i < inputs.length; i++) {
+            // 检查当前input元素的下一个兄弟元素是否是触发事件的按钮
+            if (inputs[i].nextElementSibling === button) {
+                targetInput = inputs[i];
+                break;
+            }
+        }
+
+        // 如果找到了目标input元素，则复制其内容
+        if (targetInput) {
+            var tempTextArea = document.createElement("textarea");
+            tempTextArea.value = targetInput.value;
+
+            // 设置textarea的样式并添加到DOM中
+            tempTextArea.style.position = "fixed";  // 避免页面滚动
+            tempTextArea.style.top = 0;
+            tempTextArea.style.left = 0;
+            tempTextArea.style.width = "2em";
+            tempTextArea.style.height = "2em";
+            tempTextArea.style.padding = 0;
+            tempTextArea.style.border = "none";
+            tempTextArea.style.outline = "none";
+            tempTextArea.style.boxShadow = "none";
+            tempTextArea.style.background = "transparent";
+            document.body.appendChild(tempTextArea);
+
+            tempTextArea.select();
+            tempTextArea.setSelectionRange(0, tempTextArea.value.length); // 对于移动设备
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log(vm.$message);
+                vm.$message({
+                    message: '复制成功,使用使用"win+v"查看剪贴板',
+                    type: 'success'
+                });
+            } catch (err) {
+                vm.$message({
+                    message: '复制失败',
+                    type: 'error'
+                });
+            }
+
+            // 移除临时的textarea
+            document.body.removeChild(tempTextArea);
+        }
+    }
+
+    function copyGroupText(nameId, idCardId, phoneId) {
+        var nameField = document.getElementById(nameId);
+        var idCardField = document.getElementById(idCardId);
+        var phoneField = document.getElementById(phoneId);
+
+        var tempTextArea = document.createElement("textarea");
+        tempTextArea.value = nameField.value + "\n" + idCardField.value + "\n" + phoneField.value;
+
+        tempTextArea.style.position = "fixed";
+        tempTextArea.style.top = 0;
+        tempTextArea.style.left = 0;
+        tempTextArea.style.width = "2em";
+        tempTextArea.style.height = "2em";
+        tempTextArea.style.padding = 0;
+        tempTextArea.style.border = "none";
+        tempTextArea.style.outline = "none";
+        tempTextArea.style.boxShadow = "none";
+        tempTextArea.style.background = "transparent";
+        document.body.appendChild(tempTextArea);
+
+        tempTextArea.select();
+        tempTextArea.setSelectionRange(0, tempTextArea.value.length); // 对于移动设备
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            vm.$message({
+                message: '复制成功,使用"win+v"查看剪贴板',
+                type: 'success'
+            });
+        } catch (err) {
+            vm.$message({
+                message: '复制失败',
+                type: 'error'
+            });
+        }
+
+        document.body.removeChild(tempTextArea);
+    }
+</script>
