@@ -2,269 +2,236 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Groups with Copy Buttons</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.6/lib/theme-chalk/index.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.14/vue.js"></script>
-    <script src="https://unpkg.com/element-ui@2.15.6/lib/index.js"></script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>七夕节3D旋转相册</title>
     <style>
-        .container{
-            margin-top:200px;
-            text-align: center;
-        }
-        .input-group {
-            margin-bottom: 20px;
+        /* 使用本地图片的话请按要求注释掉下边js代码中的指定行，并在.in-front、.in-back.......out-bottom后添加上background-images属性，值为'url('自己照片的本地路径')'即可。 */
+        * {
+            padding: 0;
+            margin: 0;
         }
 
-        .input-group label {
-            display: inline-block;
-            width: 80px;
-            vertical-align: top;
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            position: relative;
         }
 
-        .input-group input {
+        .background {
+            width: 100%;
+            height: 100%;
+            background-image: url(https://wimg.588ku.com/gif620/20/09/09/5a07e514eb72b1fce52ee9a447d0237d.gif);
+            background-repeat: x-repeat;
+            background-size: 66%;
+            position: relative;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .wrap span {
+            display: block;
+            height: 100px;
+            width: 100px;
+            background-color: skyblue;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            background-size: cover;
+            background-repeat: no-repeat; 
+        }
+
+        .wrap {
+            height: 200px;
             width: 200px;
-            padding: 5px;
-            margin-right: 10px;
-            font-size: 14px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            margin: 200px auto;
+            animation: rotate 10s infinite;
+            transform-style: preserve-3d;
+            animation-timing-function: linear;
         }
 
-        .input-group button {
-            padding: 5px 10px;
-            font-size: 14px;
-            cursor: pointer;
-            margin-left: 5px;
+        .in-front {
+            transform: translateZ(50px);
+            background-size: 100%;
         }
 
-        .clearfix::after {
-            content: "";
-            display: table;
-            clear: both;
+        .in-back {
+            transform: translateZ(-50px);
+            background-size: 100%;
+        }
+
+        .in-left {
+            transform: rotateY(90deg) translateZ(50px);
+            background-size: 100%;
+        }
+
+        .in-right {
+            transform: rotateY(-90deg) translateZ(50px);
+            background-size: 100%;
+        }
+
+        .in-top {
+            transform: rotateX(90deg) translateZ(50px);
+            background-size: 100%;
+        }
+
+        .in-bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+            background-size: 100%;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateX(0deg) rotate(0deg);
+            }
+
+            100% {
+                transform: rotateX(360deg) rotate(360deg);
+            }
+        }
+
+        .wrap div {
+            height: 200px;
+            width: 200px;
+            background-color: salmon;
+            position: absolute;
+            transition: all 0.6s;
+            background-size: cover;
+            background-repeat: no-repeat; 
+        }
+
+        .out-front {
+            transform: translateZ(100px);
+            background-size: 100%;
+        }
+
+        .out-back {
+            transform: translateZ(-100px);
+            background-size: 100%;
+        }
+
+        .out-left {
+            transform: rotateY(90deg) translateZ(100px);
+            background-size: 100%;
+        }
+
+        .out-right {
+            transform: rotateY(-90deg) translateZ(100px);
+            background-size: 100%;
+        }
+
+        .out-top {
+            transform: rotateX(90deg) translateZ(100px);
+            background-size: 100%;
+        }
+
+        .out-bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+            background-size: 100%;
+        }
+
+        .wrap:hover .out-front {
+            transform: translateZ(200px);
+        }
+
+        .wrap:hover .out-back {
+            transform: translateZ(-200px);
+        }
+
+        .wrap:hover .out-left {
+            transform: rotateY(90deg) translateZ(200px);
+        }
+
+        .wrap:hover .out-right {
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+
+        .wrap:hover .out-top {
+            transform: rotateX(90deg) translateZ(200px);
+        }
+
+        .wrap:hover .out-bottom {
+            transform: rotateX(-90deg) translateZ(200px);
         }
     </style>
 </head>
 
 <body>
-
-    <div class="container" id="app">
-        <h2>await蛇钞</h2>
-        <!-- 第一组input框 -->
-        <div class="input-group clearfix">
-            <label for="name1">姓名:</label>
-            <input type="text" id="name1" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard1">身份证:</label>
-            <input type="text" id="idCard1" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone1">电话:</label>
-            <input type="text" id="phone1" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name1', 'idCard1', 'phone1')">复制整组</button>
+    <div class="background">
+        <div class="wrap">
+            <span class="in-front"></span>
+            <span class="in-back"></span>
+            <span class="in-left"></span>
+            <span class="in-right"></span>
+            <span class="in-top"></span>
+            <span class="in-bottom"></span>
+            <!-- 外层： -->
+            <div class="out-front"></div>
+            <div class="out-back"></div>
+            <div class="out-left"></div>
+            <div class="out-right"></div>
+            <div class="out-top"></div>
+            <div class="out-bottom"></div>
         </div>
-        <!-- 第二组input框 -->
-        <div class="input-group clearfix">
-            <label for="name2">姓名:</label>
-            <input type="text" id="name2" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard2">身份证:</label>
-            <input type="text" id="idCard2" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone2">电话:</label>
-            <input type="text" id="phone2" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name2', 'idCard2', 'phone2')">复制整组</button>
-        </div>
-        <!-- 第三组input框（可根据需要继续添加） -->
-        <div class="input-group clearfix">
-            <label for="name3">姓名:</label>
-            <input type="text" id="name3" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard3">身份证:</label>
-            <input type="text" id="idCard3" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone3">电话:</label>
-            <input type="text" id="phone3" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name3', 'idCard3', 'phone3')">复制整组</button>
-        </div>
-        <div class="input-group clearfix">
-            <label for="name4">姓名:</label>
-            <input type="text" id="name4" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard4">身份证:</label>
-            <input type="text" id="idCard4" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone4">电话:</label>
-            <input type="text" id="phone4" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name4', 'idCard4', 'phone4')">复制整组</button>
-        </div>
-
-        <div class="input-group clearfix">
-            <label for="name5">姓名:</label>
-            <input type="text" id="name5" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard5">身份证:</label>
-            <input type="text" id="idCard5" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone5">电话:</label>
-            <input type="text" id="phone5" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name5', 'idCard5', 'phone5')">复制整组</button>
-        </div>
-        
-        <div class="input-group clearfix">
-            <label for="name6">姓名:</label>
-            <input type="text" id="name6" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard6">身份证:</label>
-            <input type="text" id="idCard6" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone6">电话:</label>
-            <input type="text" id="phone6" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name6', 'idCard6', 'phone6')">复制整组</button>
-        </div>
-
-        <div class="input-group clearfix">
-            <label for="name7">姓名:</label>
-            <input type="text" id="name7" placeholder="请输入姓名">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="idCard7">身份证:</label>
-            <input type="text" id="idCard7" placeholder="请输入身份证">
-            <button onclick="copyText(this)">复制</button>
-
-            <label for="phone7">电话:</label>
-            <input type="text" id="phone7" placeholder="请输入电话">
-            <button onclick="copyText(this)">复制</button>
-
-            <button onclick="copyGroupText('name7', 'idCard7', 'phone7')">复制整组</button>
+        <div style="position: absolute; bottom: 10px; width: 100%; text-align: center; color: white; background-color: rgba(0, 0, 0, 0.5);">
+            如有侵权联系作者 236888888@qq.com
         </div>
     </div>
-
-
+    <script>
+        const urlList = [
+            "https://pic.img.wang/img/2024/12/26/676d1e532b02e.png",
+            "https://pic.img.wang/img/2024/12/26/676d1f212b3a5.png",
+            "https://pic.img.wang/img/2024/12/26/676d1f2168992.png",
+            "https://pic.img.wang/img/2024/12/26/676d1f20d28d9.png",
+            "https://pic.img.wang/img/2024/12/26/676d20f396e6f.png",
+            "https://pic.img.wang/img/2024/12/26/676d20f2923e4.png",
+            "https://pic.img.wang/img/2024/12/26/676d20f31dcff.png",
+            "https://pic.img.wang/img/2024/12/26/676d20f40fd75.png",
+            "https://pic.img.wang/img/2024/12/26/676d1f20d28d9.png",
+            "https://pic.img.wang/img/2024/12/26/676d20f3becc5.png",
+            "https://pic.img.wang/img/2024/12/26/676d24aec698f.png",
+            "https://pic.img.wang/img/2024/12/26/676d24ae92b0e.png",
+            "https://pic.img.wang/img/2024/12/26/676d24b0add02.png",
+            "https://pic.img.wang/img/2024/12/26/676d24b073a57.png",
+            "https://pic.img.wang/img/2024/12/26/676d24b02e13c.png",
+            "https://pic.img.wang/img/2024/12/26/676d24afadf21.png",
+            "https://pic.img.wang/img/2024/12/26/676d24b0d2518.png",
+            "https://pic.img.wang/img/2024/12/26/676d24b112f19.png",
+            // "https://pic.img.wang/img/2024/12/26/676d1f20d28d9.png",
+            // "https://pic.img.wang/img/2024/12/26/676d1f20d28d9.png",
+            // "https://img2.baidu.com/it/u=2615932853,2425748336&fm=253&fmt=auto&app=138&f=JPEG?w=711&h=459",
+            // "https://img2.baidu.com/it/u=2294779632,1476523525&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500",
+            // "https://img0.baidu.com/it/u=3561322606,2603151212&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=625",
+            // "https://img0.baidu.com/it/u=3416499135,857424318&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=750",
+            // "https://img1.baidu.com/it/u=3153729209,616088956&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=668",
+            // "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2022%2F0804%2F57a99713j00rg3a6f00a0c001z402gwm.jpg&thumbnail=660x2147483647&quality=80&type=jpg",
+            // "https://img2.baidu.com/it/u=1293260410,3751082277&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500",
+            // "https://img2.baidu.com/it/u=3938168370,3313419093&fm=253&fmt=auto&app=138&f=JPEG?w=344&h=499",
+            // "https://img2.baidu.com/it/u=1183888668,1450015188&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=667",
+            // "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw%2F86c1cb77-7a96-4ca0-a2db-17bdfc99ad03%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1725785533&t=20c07f09c9f755935aee30767118da9d",
+            // "https://img1.baidu.com/it/u=143669273,3429724512&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=666",
+            // "https://q6.itc.cn/images01/20240711/501de75bce814a0f917119137c2122be.jpeg",
+        ];
+        function traverseElement(element) {
+            console.log(element); // 输出当前元素
+            for (let i = 0; i < element.children.length; i++) {
+                element.children[i].style.backgroundImage = `url(${urlList[i]})`; // 如果使用本地图片，请注释掉这一行（或者删掉所有js代码也可以），并在上边的css文件中的background-image属性中替换为自己的本地照片！
+            }
+        }
+        const wrap = document.querySelector(".wrap");
+        traverseElement(wrap);
+    </script>
 </body>
 
 </html>
-<script>
-    const vm = new Vue({
-        el: '#app',
-    });
-    // window.ElementUI = ElementUI;
-    function copyText(button) {
-        // 获取触发事件的按钮的父元素（input-group），然后找到该元素内的所有input元素
-        var inputGroup = button.parentElement;
-        var inputs = inputGroup.getElementsByTagName('input');
-
-        // 由于按钮是input元素的兄弟元素，我们可以通过遍历找到它之前的input元素
-        // 这里我们假设每个按钮都紧跟在它对应的input元素之后
-        var targetInput = null;
-        for (var i = 0; i < inputs.length; i++) {
-            // 检查当前input元素的下一个兄弟元素是否是触发事件的按钮
-            if (inputs[i].nextElementSibling === button) {
-                targetInput = inputs[i];
-                break;
-            }
-        }
-
-        // 如果找到了目标input元素，则复制其内容
-        if (targetInput) {
-            var tempTextArea = document.createElement("textarea");
-            tempTextArea.value = targetInput.value;
-
-            // 设置textarea的样式并添加到DOM中
-            tempTextArea.style.position = "fixed";  // 避免页面滚动
-            tempTextArea.style.top = 0;
-            tempTextArea.style.left = 0;
-            tempTextArea.style.width = "2em";
-            tempTextArea.style.height = "2em";
-            tempTextArea.style.padding = 0;
-            tempTextArea.style.border = "none";
-            tempTextArea.style.outline = "none";
-            tempTextArea.style.boxShadow = "none";
-            tempTextArea.style.background = "transparent";
-            document.body.appendChild(tempTextArea);
-
-            tempTextArea.select();
-            tempTextArea.setSelectionRange(0, tempTextArea.value.length); // 对于移动设备
-
-            try {
-                var successful = document.execCommand('copy');
-                var msg = successful ? 'successful' : 'unsuccessful';
-                console.log(vm.$message);
-                vm.$message({
-                    message: '复制成功,使用使用"win+v"查看剪贴板',
-                    type: 'success'
-                });
-            } catch (err) {
-                vm.$message({
-                    message: '复制失败',
-                    type: 'error'
-                });
-            }
-
-            // 移除临时的textarea
-            document.body.removeChild(tempTextArea);
-        }
-    }
-
-    function copyGroupText(nameId, idCardId, phoneId) {
-        var nameField = document.getElementById(nameId);
-        var idCardField = document.getElementById(idCardId);
-        var phoneField = document.getElementById(phoneId);
-
-        var tempTextArea = document.createElement("textarea");
-        tempTextArea.value = nameField.value + "\n" + idCardField.value + "\n" + phoneField.value;
-
-        tempTextArea.style.position = "fixed";
-        tempTextArea.style.top = 0;
-        tempTextArea.style.left = 0;
-        tempTextArea.style.width = "2em";
-        tempTextArea.style.height = "2em";
-        tempTextArea.style.padding = 0;
-        tempTextArea.style.border = "none";
-        tempTextArea.style.outline = "none";
-        tempTextArea.style.boxShadow = "none";
-        tempTextArea.style.background = "transparent";
-        document.body.appendChild(tempTextArea);
-
-        tempTextArea.select();
-        tempTextArea.setSelectionRange(0, tempTextArea.value.length); // 对于移动设备
-
-        try {
-            var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
-            vm.$message({
-                message: '复制成功,使用"win+v"查看剪贴板',
-                type: 'success'
-            });
-        } catch (err) {
-            vm.$message({
-                message: '复制失败',
-                type: 'error'
-            });
-        }
-
-        document.body.removeChild(tempTextArea);
-    }
-</script>
