@@ -59,6 +59,7 @@
             animation: rotate 10s infinite;
             transform-style: preserve-3d;
             animation-timing-function: linear;
+            touch-action: manipulation;
         }
 
         .in-front {
@@ -165,6 +166,7 @@
             transform: rotateX(-90deg) translateZ(200px);
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
 </head>
 
 <body>
@@ -226,11 +228,23 @@
         function traverseElement(element) {
             console.log(element); // 输出当前元素
             for (let i = 0; i < element.children.length; i++) {
-                element.children[i].style.backgroundImage = `url(${urlList[i]})`; // 如果使用本地图片，请注释掉这一行（或者删掉所有js代码也可以），并在上边的css文件中的background-image属性中替换为自己的本地照片！
+                element.children[i].style.backgroundImage = `url(${urlList[i]})`;
             }
         }
         const wrap = document.querySelector(".wrap");
         traverseElement(wrap);
+
+        // 为移动端添加点击事件
+        const outElements = document.querySelectorAll('.wrap div');
+        outElements.forEach(element => {
+            element.addEventListener('click', function() {
+                if (element.style.transform.includes('translateZ(200px)')) {
+                    element.style.transform = element.style.transform.replace('translateZ(200px)', 'translateZ(100px)');
+                } else {
+                    element.style.transform = element.style.transform.replace('translateZ(100px)', 'translateZ(200px)');
+                }
+            });
+        });
     </script>
 </body>
 
